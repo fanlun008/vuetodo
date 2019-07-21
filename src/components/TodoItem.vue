@@ -1,5 +1,7 @@
 <template>
   <li
+    @mouseenter="handleEnter(true)"
+    @mouseleave="handleEnter(false)"
     class="todo"
     :class="{completed: todo.complete}"
   >
@@ -25,7 +27,13 @@ export default {
     deleteTodo: Function
   },
   methods: {
-    
+    handleEnter(isEnter) {
+      if (isEnter) {
+        this.isShow = true;
+      } else {
+        this.isShow = false;
+      }
+    },
     deleteItem() {
       const { todo, index, deleteTodo } = this;
       deleteTodo(index);
