@@ -3,7 +3,7 @@
     <h1>todos</h1>
     <div class="todo-wrap">
       <todo-header :addTodo="addTodo" />
-      <todo-list :todos="todos" :deleteTodo="deleteTodo" :selectAll="selectAll" />
+      <todo-list :todos="todos"  :filteredTodos="filteredTodos" :deleteTodo="deleteTodo" :selectAll="selectAll" />
       <todo-footer v-show="this.todos.length" :todos="todos" :visibility="visibility" :setvisibility="setvisibility" :deleteComplete="deleteComplete" />
     </div>
   </div>
@@ -51,6 +51,14 @@ export default {
     },
     setvisibility(type) {
       this.visibility = type;
+    }
+  },
+  computed: {
+    filteredTodos: function() {
+      return filters[this.visibility](this.todos);
+    },
+    remaining: function() {
+      return filters.active(this.todos).length;
     }
   },
   components: {

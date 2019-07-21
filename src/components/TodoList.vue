@@ -9,7 +9,7 @@
     <label for="toggle"></label>
     <ul class="todo-list">
       <todo-item
-        v-for="(todo, index) in todos"
+        v-for="(todo, index) in filteredTodos"
         :key="index"
         :index="index"
         :todo="todo"
@@ -27,6 +27,7 @@ export default {
     todos: Array,
     deleteTodo: Function,
     selectAll: Function,
+    filteredTodos: Array
   },
   components: {
     TodoItem
