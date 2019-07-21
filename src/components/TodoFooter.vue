@@ -31,7 +31,27 @@
 </template>
 
 <script>
-export default {};
+export default {
+  props: {
+    todos: Array,
+    deleteComplete: Function,
+    visibility: String,
+    setvisibility: Function
+  },
+  computed: {
+    completeSize() {
+      return this.todos.reduce(
+        (total, todo) => total + (todo.complete ? 1 : 0),
+        0
+      );
+    }
+  },
+  methods: {
+    selectedFilterType(type) {
+      this.setvisibility(type);
+    }
+  }
+};
 </script>
 
 <style>

@@ -13,6 +13,22 @@
 import TodoHeader from "./components/TodoHeader";
 import TodoList from "./components/TodoList";
 import TodoFooter from "./components/TodoFooter";
+
+var filters = {
+  all: function(todos) {
+    return todos;
+  },
+  active: function(todos) {
+    return todos.filter(function(todo) {
+      return !todo.complete;
+    });
+  },
+  completed: function(todos) {
+    return todos.filter(function(todo) {
+      return todo.complete;
+    });
+  }
+};
 export default {
   data() {
     return {
