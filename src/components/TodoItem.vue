@@ -3,14 +3,15 @@
     @mouseenter="handleEnter(true)"
     @mouseleave="handleEnter(false)"
     class="todo"
-    :class="{completed: todo.complete}"
+    :class="{completed: todo.complete, editing: isEdit}"
   >
     <div class="view">
       <input :id="index" type="checkbox" v-model="todo.complete" />
       <label :for="index"></label>
-      <span class="title">{{todo.title}}</span>
+      <span class="title" @dblclick="enterEdit()">{{todo.title}}</span>
       <span class="deleteBtn" v-show="isShow" @click="deleteItem">x</span>
     </div>
+    <input type="text" class="edit" v-model="todo.title" @blur="completeEdit" @keyup.enter="completeEdit">
   </li>
 </template>
 
@@ -18,7 +19,8 @@
 export default {
   data() {
     return {
-      isShow: false
+      isShow: false,
+      isEdit: false,
     };
   },
   props: {
@@ -27,6 +29,12 @@ export default {
     deleteTodo: Function
   },
   methods: {
+    enterEdit: function() {
+      this.isEdit = true;
+    },
+    completeEdit() {
+      this.isEdit = false;
+    },
     handleEnter(isEnter) {
       if (isEnter) {
         this.isShow = true;
@@ -43,6 +51,22 @@ export default {
 </script>
 
 <style>
+li .edit {
+  display: none;
+}
+
+li.editing .edit {
+  display: block;
+  position: absolute;
+  width: 470px;
+  padding: 4px 16px;
+  margin: 0 0 0 43px;
+  font-size: 35px;
+  line-height: 35px;
+  height: 50px;
+  top: -10px;
+}
+
 li.completed span.title {
   color: #d9d9d9;
   text-decoration: line-through;
