@@ -1,12 +1,41 @@
 <template>
   <div class="todo-header">
-    <input v-model="title" @keyup.enter="addItem" type="text" class="new-todo" placeholder="What needs to be done" />
+    <input
+      v-model="title"
+      @keyup.enter="addItem"
+      type="text"
+      class="new-todo"
+      placeholder="What needs to be done"
+    />
   </div>
 </template>
 
 <script>
 export default {
-
+  props: {
+    addTodo: {
+      type: Function
+    }
+  },
+  data() {
+    return {
+      title: ""
+    };
+  },
+  methods: {
+    addItem() {
+      const title = this.title.trim();
+      if (!title) {
+        return;
+      }
+      const todo = {
+        title: title,
+        complete: false
+      };
+      this.addTodo(todo);
+      this.title = "";
+    }
+  }
 };
 </script>
 

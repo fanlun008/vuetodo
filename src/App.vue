@@ -3,13 +3,14 @@
     <h1>todos</h1>
     <div class="todo-wrap">
       <todo-header :addTodo="addTodo" />
+      <todo-list :todos="todos" :filteredTodos="filteredTodos" :deleteTodo="deleteTodo" :selectAll="selectAll" />
     </div>
   </div>
 </template>
 
 <script>
 import TodoHeader from "./components/TodoHeader";
-
+import TodoList from "./components/TodoList";
 export default {
   data() {
     return {
@@ -17,8 +18,26 @@ export default {
       visibility: 'all'
     };
   },
+  methods: {
+    addTodo(todo) {
+      this.todos.unshift(todo);
+    },
+    deleteTodo(index) {
+      this.todos.splice(index, 1);
+    },
+    deleteComplete() {
+      this.todos = this.todos.filter(todo => !todo.complete);
+    },
+    selectAll(check) {
+      this.todos.forEach(todo => (todo.complete = check));
+    },
+    setvisibility(type) {
+      this.visibility = type;
+    }
+  },
   components: {
-    TodoHeader
+    TodoHeader,
+    TodoList,
   }
 };
 </script>
