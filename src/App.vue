@@ -4,6 +4,7 @@
     <div class="todo-wrap">
       <todo-header :addTodo="addTodo" />
       <todo-list :todos="todos" :deleteTodo="deleteTodo" :selectAll="selectAll" />
+      <todo-footer v-show="this.todos.length" :todos="todos" :visibility="visibility" :setvisibility="setvisibility" :deleteComplete="deleteComplete" />
     </div>
   </div>
 </template>
@@ -11,6 +12,7 @@
 <script>
 import TodoHeader from "./components/TodoHeader";
 import TodoList from "./components/TodoList";
+import TodoFooter from "./components/TodoFooter";
 export default {
   data() {
     return {
@@ -38,6 +40,7 @@ export default {
   components: {
     TodoHeader,
     TodoList,
+    TodoFooter
   }
 };
 </script>
