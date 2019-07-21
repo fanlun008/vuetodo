@@ -3,7 +3,7 @@
     <h1>todos</h1>
     <div class="todo-wrap">
       <todo-header :addTodo="addTodo" />
-      <todo-list :todos="todos" :filteredTodos="filteredTodos" :deleteTodo="deleteTodo" :selectAll="selectAll" />
+      <todo-list :todos="todos" :deleteTodo="deleteTodo" :selectAll="selectAll" />
     </div>
   </div>
 </template>

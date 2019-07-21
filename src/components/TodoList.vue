@@ -7,19 +7,49 @@
       :class="{alllabeltoggle: isAllCheckOrNone}"
     />
     <label for="toggle"></label>
-    <ul class="todo-list"></ul>
+    <ul class="todo-list">
+      <todo-item
+        v-for="(todo, index) in todos"
+        :key="index"
+        :index="index"
+        :todo="todo"
+        :deleteTodo="deleteTodo"
+      />
+    </ul>
   </div>
 </template>
 
 <script>
+import TodoItem from "./TodoItem";
+
 export default {
   props: {
     todos: Array,
     deleteTodo: Function,
     selectAll: Function,
-    filteredTodos: Array
   },
-  components: {}
+  components: {
+    TodoItem
+  },
+  computed: {
+    isAllCheckOrNone() {
+      return this.completeSize === this.todos.length && this.todos.length;
+    },
+    isAllCheck: {
+      get() {
+        return this.completeSize === this.todos.length;
+      },
+      set(value) {
+        this.selectAll(value);
+      }
+    },
+    completeSize() {
+      return this.todos.reduce(
+        (total, todo) => total + (todo.complete ? 1 : 0),
+        0
+      );
+    }
+  }
 };
 </script>
 
