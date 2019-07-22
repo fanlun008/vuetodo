@@ -13,7 +13,6 @@
         :key="index"
         :index="index"
         :todo="todo"
-        :deleteTodo="deleteTodo"
       />
     </ul>
   </div>
@@ -21,35 +20,27 @@
 
 <script>
 import TodoItem from "./TodoItem";
+import {mapState, mapGetters, mapMutations} from 'vuex'
 
 export default {
-  props: {
-    todos: Array,
-    deleteTodo: Function,
-    selectAll: Function,
-    filteredTodos: Array
-  },
+
   components: {
     TodoItem
   },
   computed: {
-    isAllCheckOrNone() {
-      return this.completeSize === this.todos.length && this.todos.length;
-    },
+    ...mapState(['todos']),
+    ...mapGetters(['completeSize', 'isAllCheckOrNone', 'filteredTodos']),
+    ...mapMutations(['selectAll']),
+ 
     isAllCheck: {
       get() {
         return this.completeSize === this.todos.length;
       },
       set(value) {
-        this.selectAll(value);
+        this.$store.commit('selectAll', value);
       }
     },
-    completeSize() {
-      return this.todos.reduce(
-        (total, todo) => total + (todo.complete ? 1 : 0),
-        0
-      );
-    }
+
   }
 };
 </script>

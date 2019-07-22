@@ -31,24 +31,21 @@
 </template>
 
 <script>
+import {mapMutations, mapState} from 'vuex';
+import { mapGetters } from 'vuex';
+
 export default {
-  props: {
-    todos: Array,
-    deleteComplete: Function,
-    visibility: String,
-    setvisibility: Function
-  },
+
+  
   computed: {
-    completeSize() {
-      return this.todos.reduce(
-        (total, todo) => total + (todo.complete ? 1 : 0),
-        0
-      );
-    }
+    ...mapState(['todos', 'visibility']),
+    ...mapGetters(['completeSize']),
+
   },
   methods: {
+    ...mapMutations(['deleteComplete']),
     selectedFilterType(type) {
-      this.setvisibility(type);
+      this.$store.commit('setvisibility', type)
     }
   }
 };

@@ -11,12 +11,9 @@
 </template>
 
 <script>
+import {mapMutations} from 'vuex'
+
 export default {
-  props: {
-    addTodo: {
-      type: Function
-    }
-  },
   data() {
     return {
       title: ""
@@ -32,7 +29,7 @@ export default {
         title: title,
         complete: false
       };
-      this.addTodo(todo);
+      this.$store.commit('addTodo', todo)
       this.title = "";
     }
   }

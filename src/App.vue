@@ -2,9 +2,9 @@
   <div class="todo-container">
     <h1>todos</h1>
     <div class="todo-wrap">
-      <todo-header :addTodo="addTodo" />
-      <todo-list :todos="todos"  :filteredTodos="filteredTodos" :deleteTodo="deleteTodo" :selectAll="selectAll" />
-      <todo-footer v-show="this.todos.length" :todos="todos" :visibility="visibility" :setvisibility="setvisibility" :deleteComplete="deleteComplete" />
+      <todo-header />
+      <todo-list />
+      <todo-footer v-show="this.$store.state.todos.length" />
     </div>
   </div>
 </template>
@@ -14,52 +14,13 @@ import TodoHeader from "./components/TodoHeader";
 import TodoList from "./components/TodoList";
 import TodoFooter from "./components/TodoFooter";
 
-var filters = {
-  all: function(todos) {
-    return todos;
-  },
-  active: function(todos) {
-    return todos.filter(function(todo) {
-      return !todo.complete;
-    });
-  },
-  completed: function(todos) {
-    return todos.filter(function(todo) {
-      return todo.complete;
-    });
-  }
-};
+import {mapMutations, mapGetters} from 'vuex'
+
 export default {
-  data() {
-    return {
-      todos: [],
-      visibility: 'all'
-    };
-  },
-  methods: {
-    addTodo(todo) {
-      this.todos.unshift(todo);
-    },
-    deleteTodo(index) {
-      this.todos.splice(index, 1);
-    },
-    deleteComplete() {
-      this.todos = this.todos.filter(todo => !todo.complete);
-    },
-    selectAll(check) {
-      this.todos.forEach(todo => (todo.complete = check));
-    },
-    setvisibility(type) {
-      this.visibility = type;
-    }
-  },
+
   computed: {
-    filteredTodos: function() {
-      return filters[this.visibility](this.todos);
-    },
-    remaining: function() {
-      return filters.active(this.todos).length;
-    }
+    ...mapGetters(['filteredTodos']),
+ 
   },
   components: {
     TodoHeader,

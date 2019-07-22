@@ -25,8 +25,7 @@ export default {
   },
   props: {
     todo: Object,
-    index: Number,
-    deleteTodo: Function
+    index: Number
   },
   methods: {
     enterEdit: function() {
@@ -44,7 +43,7 @@ export default {
     },
     deleteItem() {
       const { todo, index, deleteTodo } = this;
-      deleteTodo(index);
+      this.$store.commit('deleteTodo', index)
     }
   }
 };
