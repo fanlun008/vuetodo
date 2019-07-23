@@ -6,10 +6,11 @@
     :class="{completed: todo.complete, editing: isEdit}"
   >
     <div class="view">
-      <input :id="index" type="checkbox" v-model="todo.complete" />
+      <input :id="index" type="checkbox" v-model="todo.complete" @click="changeItemStatus"/>
       <label :for="index"></label>
+      <input type="hidden" name="" :value="todo.id">
       <span class="title" @dblclick="enterEdit()">{{todo.title}}</span>
-      <span class="deleteBtn" v-show="isShow" @click="deleteItem">x</span>
+      <span class="deleteBtn" v-show="isShow" @click="deleteItem(todo.id)">x</span>
     </div>
     <input type="text" class="edit" v-model="todo.title" @blur="completeEdit" @keyup.enter="completeEdit">
   </li>
@@ -28,6 +29,11 @@ export default {
     index: Number
   },
   methods: {
+    changeItemStatus() {
+      this.todo.complete = !this.todo.complete
+      this.$store.dispatch('changeItemStatus', this.todo)
+    },
+
     enterEdit: function() {
       this.isEdit = true;
     },
@@ -41,9 +47,11 @@ export default {
         this.isShow = false;
       }
     },
-    deleteItem() {
+    deleteItem(id) {
       const { todo, index, deleteTodo } = this;
-      this.$store.commit('deleteTodo', index)
+      console.log("deleteById", id);
+      // this.$store.commit('deleteTodo', index)
+      this.$store.dispatch('deleteTodo', id)
     }
   }
 };

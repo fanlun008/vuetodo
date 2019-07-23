@@ -29,7 +29,8 @@ export default {
         title: title,
         complete: false
       };
-      this.$store.commit('addTodo', todo)
+      // this.$store.commit('addTodo', todo)
+      this.$store.dispatch('addTodo', todo);
       this.title = "";
     }
   }
