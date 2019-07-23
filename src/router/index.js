@@ -24,6 +24,10 @@ export default new Router({
         {
           path: '/todoList',
           component: todolistmain
+        },
+        {
+          path: '/home/:id?',
+          redirect: '/todoList'
         }
       ]
     },
