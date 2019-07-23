@@ -18,7 +18,7 @@ export default new Router({
       component: home,
       children: [
         {
-          path: '/myInfo',
+          path: '/myInfo/:id',
           component: myInfo
         },
         {

@@ -1,14 +1,15 @@
 <template>
   <div class="home-container">
-    <div class="container-header">home---{{$route.params.id}}</div>
+    <div class="container-header">
+      <div class="header-name">home---{{userName}}</div>
+    </div>
     <div class="left-nav">
       <div>
         <router-link to="/todoList">todoList</router-link>
       </div>
       <div>
-        <router-link to="/myInfo">myInfo</router-link>
+        <router-link :to="{path: `/myInfo/${this.userName}`}">myInfo</router-link>
       </div>
-      
     </div>
     <div class="right-nav">
       <router-view></router-view>
@@ -17,17 +18,23 @@
 </template>
 
 <script>
-  export default {
-    
-  }
+export default {
+  data() {
+    return {
+      userName: this.$route.params.id
+    }
+  },
+};
 </script>
 
 <style>
-
 .home-container {
   border: 1px solid black;
   width: 100%;
   height: 800px;
+}
+
+.container-header .header-name {
 }
 
 .home-container .left-nav {
