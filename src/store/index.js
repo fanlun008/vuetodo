@@ -18,6 +18,9 @@ const actions = {
 
   addTodo({commit, dispatch}, todo) {
     axios.post("http://localhost:8089/todos", todo).then((response) => {
+      if(response.data == 'repeat') {
+        alert('输入重复title');
+      }
       console.log(response);
       dispatch('loadAllTodos');
     });
