@@ -5,28 +5,26 @@
     </span>
     <ul class="filters">
       <li>
-        <a
-          href="#/all"
+        <a-button
           :class="{selected: visibility=='all'}"
           @click="selectedFilterType('all')"
-        >All</a>
+        >All</a-button>
       </li>
       <li>
-        <a
-          href="#/active"
+        <a-button
           :class="{selected: visibility=='active'}"
           @click="selectedFilterType('active')"
-        >Active</a>
+        >Active</a-button>
       </li>
       <li>
-        <a
-          href="#/completed"
+        <a-button
           :class="{selected: visibility=='completed'}"
           @click="selectedFilterType('completed')"
-        >Completed</a>
+        >Completed</a-button>
       </li>
     </ul>
-    <button class="clear-completed" v-show="completeSize" @click="deleteComplete">Clear completed</button>
+    <a-button class="clear-completed" v-show="completeSize" @click="deleteComplete">Clear completed</a-button>
+    <div style="clear:both"></div>
   </div>
 </template>
 
@@ -109,16 +107,18 @@ a:-webkit-any-link {
   border: 1px solid rgba(224, 213, 213);
 }
 
-.filters li a.selected {
+.filters li button.selected {
   border-color: rgba(175, 47, 47, 0.2);
+  background: rgb(196, 196, 250);
+  color: white;
 }
 
 .footer {
   color: #777;
   padding: 10px 15px;
-  height: 20px;
   text-align: center;
   border-top: 1px solid #e6e6e6;
+  overflow: hidden;
 }
 
 .footer .todo-count {

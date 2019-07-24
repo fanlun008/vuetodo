@@ -2,9 +2,16 @@
   <div class="todo-container">
 
     <div class="routerlink">
-      <router-link :to="{path:'/welcome'}">welcome</router-link>
+      <!-- <router-link :to="{path:'/welcome'}">welcome</router-link>
       <router-link to="/home">home</router-link>
       <router-link to="/home/Bill">home-Bill</router-link>
+      <router-link to="/refactor">homeRefactor</router-link> -->
+
+      <a-menu mode="horizontal" theme="dark">
+        <a-menu-item key="mail" >
+          <a-icon type="mail"/><router-link :to="{path:'/welcome'}" style="display: inline-block">welcome</router-link>
+        </a-menu-item>
+      </a-menu>
     </div>
 
     <div class="routercontent">
@@ -30,6 +37,11 @@ import axios from 'axios'
 import {mapMutations, mapGetters, mapActions} from 'vuex'
 
 export default {
+  methods: {
+    to(path) {
+      this.$route.push(path);
+    }
+  },
 
   computed: {
     ...mapGetters(['filteredTodos']),

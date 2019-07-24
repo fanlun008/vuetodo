@@ -69,7 +69,7 @@ export default {
 }
 
 input {
-  width: 86%;
+  width: 100%;
   text-rendering: auto;
   color: initial;
   letter-spacing: normal;

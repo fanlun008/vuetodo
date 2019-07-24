@@ -10,14 +10,21 @@
       <label :for="index"></label>
       <input type="hidden" name="" :value="todo.id">
       <span class="title" @dblclick="enterEdit()">{{todo.title}}</span>
-      <span class="deleteBtn" v-show="isShow" @click="deleteItem(todo.id)">x</span>
+      <span class="deleteBtn" v-show="isShow" @click="deleteItem(todo.id)"><a-icon type="delete" /></span>
+
     </div>
     <input type="text" class="edit" v-model="todo.title" @blur="completeEdit" @keyup.enter="completeEdit">
   </li>
 </template>
 
 <script>
+import {Button} from 'ant-design-vue/lib/button'
+import "ant-design-vue/dist/antd.css";
+
 export default {
+  components: {
+    Button,
+  },
   data() {
     return {
       isShow: false,
@@ -39,6 +46,7 @@ export default {
     },
     completeEdit() {
       this.isEdit = false;
+      this.$store.dispatch('changeItemStatus', this.todo);
     },
     handleEnter(isEnter) {
       if (isEnter) {

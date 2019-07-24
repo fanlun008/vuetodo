@@ -4,6 +4,7 @@ import home from '../components/home.vue'
 import welcome from '../components/welcome.vue'
 import myInfo from '../components/myInfo.vue'
 import todolistmain from '../components/todolistmain.vue'
+import refactor from '../components/refactor.vue'
 
 Vue.use(Router)
 
@@ -12,6 +13,10 @@ export default new Router({
     {
       path: '/welcome',
       component: welcome
+    },
+    {
+      path: '/refactor',
+      component: refactor
     },
     {
       path: '/home/:id',
