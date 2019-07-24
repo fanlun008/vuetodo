@@ -11,6 +11,10 @@
       <input type="hidden" name="" :value="todo.id">
       <span class="title" @dblclick="enterEdit()">{{todo.title}}</span>
       <span class="deleteBtn" v-show="isShow" @click="deleteItem(todo.id)"><a-icon type="delete" /></span>
+      <a-popconfirm title="Are you sure delete this task?" @confirm="confirm" @cancel="cancel" okText="Yes" cancelText="No">
+        <span class="deleteBtn" style="display:block"><a-icon type="delete" />x</span>
+      </a-popconfirm>
+      
 
     </div>
     <input type="text" class="edit" v-model="todo.title" @blur="completeEdit" @keyup.enter="completeEdit">
@@ -36,6 +40,14 @@ export default {
     index: Number
   },
   methods: {
+    confirm (e) {
+      this.$store.dispatch('deleteTodo', this.todo.id)
+      this.$message.success('Click on Yes')
+    },
+    cancel (e) {
+      console.log(e)
+      this.$message.error('Click on No')
+    },
     changeItemStatus() {
       this.todo.complete = !this.todo.complete
       this.$store.dispatch('changeItemStatus', this.todo)
