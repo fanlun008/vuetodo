@@ -5,7 +5,7 @@
     </div>
     <div class="left-nav">
       <div>
-        <router-link to="/todoList">todoList</router-link>
+        <router-link :to="{path: `/home/${this.userName}`}">todoList</router-link>
       </div>
       <div>
         <router-link :to="{path: `/myInfo/${this.userName}`}">myInfo</router-link>
